@@ -8,6 +8,7 @@ using System.Runtime.InteropServices;
 using SuperSocket.WebSocket;
 using SuperSocket.SocketBase.Config;
 using SuperSocket.SocketBase;
+using System.Net.NetworkInformation;
 
 
 
@@ -93,12 +94,24 @@ namespace CopySync
         // 获取本机局域网IP地址
         private string GetLocalIPAddress()
         {
-            var host = Dns.GetHostEntry(Dns.GetHostName());
-            foreach (var ip in host.AddressList)
+            // 获取所有网络接口
+            NetworkInterface[] adapters = NetworkInterface.GetAllNetworkInterfaces();
+            foreach (NetworkInterface adapter in adapters)
             {
-                if (ip.AddressFamily == AddressFamily.InterNetwork)
+                // 检查接口是否是WLAN，并且处于开机状态
+                if (adapter.NetworkInterfaceType == NetworkInterfaceType.Wireless80211 && adapter.OperationalStatus == OperationalStatus.Up)
                 {
-                    return ip.ToString();
+                    // 获取IPv4地址信息
+                    IPInterfaceProperties ipProps = adapter.GetIPProperties();
+                    UnicastIPAddressInformationCollection ipAddresses = ipProps.UnicastAddresses;
+                    foreach (UnicastIPAddressInformation ipAddress in ipAddresses)
+                    {
+                        // 确保是IPv4地址
+                        if (ipAddress.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            return ipAddress.Address.ToString();
+                        }
+                    }
                 }
             }
             throw new Exception("No network adapters with an IPv4 address in the system!");
