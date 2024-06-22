@@ -56,6 +56,7 @@ namespace CopySync
             // 为服务器设置连接事件处理程序
             websocketServer.NewSessionConnected += WebSocketServer_NewSessionConnected;
             websocketServer.SessionClosed += WebSocketServer_SessionClosed;
+            websocketServer.NewMessageReceived += WebsocketServer_NewMessageReceived;
             // 启动服务器
             if (!websocketServer.Start())
             {
@@ -73,6 +74,14 @@ namespace CopySync
             // 创建二维码
             CreateQRCode(wsUrl);
         }
+
+        private void WebsocketServer_NewMessageReceived(WebSocketSession session, string value)
+        {
+            this.Invoke((MethodInvoker)delegate {
+                Clipboard.SetText(value);
+            });
+        }
+
         private void WebSocketServer_NewSessionConnected(WebSocketSession session)
         {
             // 当有客户端连接时，打印日志

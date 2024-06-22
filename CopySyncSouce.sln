@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopySync", "CopySync.csproj", "{5BEAF52A-9103-458B-BA92-3D0768556669}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CopySyncSource", "CopySyncSource.csproj", "{5BEAF52A-9103-458B-BA92-3D0768556669}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "CopySync", "..\CopySync\CopySync.vdproj", "{17105223-32D5-4079-8292-4C55DF885907}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,8 @@ Global
 		{5BEAF52A-9103-458B-BA92-3D0768556669}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BEAF52A-9103-458B-BA92-3D0768556669}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BEAF52A-9103-458B-BA92-3D0768556669}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17105223-32D5-4079-8292-4C55DF885907}.Debug|Any CPU.ActiveCfg = Debug
+		{17105223-32D5-4079-8292-4C55DF885907}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
